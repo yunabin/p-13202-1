@@ -40,4 +40,24 @@ public class ArticleController {
         model.addAttribute("article", articleService.findById(id));
         return "article/detail";
     }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model) {
+        model.addAttribute("article", articleService.findById(id));
+        return "article/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable Long id,
+                         @RequestParam String title,
+                         @RequestParam String content) {
+        articleService.update(id, title, content);
+        return "redirect:/article/detail/" + id;
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        articleService.delete(id);
+        return "redirect:/article/list";
+    }
 }

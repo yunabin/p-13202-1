@@ -25,4 +25,15 @@ public class ArticleService {
     public void save(Article article) {
         articleRepository.save(article);
     }
+
+    public void update(Long id, String title, String content) {
+        Article article = findById(id);
+        article.setTitle(title);
+        article.setContent(content);
+        articleRepository.save(article);
+    }
+
+    public void delete(Long id) {
+        articleRepository.deleteById(id);
+    }
 }
